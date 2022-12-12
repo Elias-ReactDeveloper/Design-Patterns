@@ -18,3 +18,4 @@ const Singleton = function(){
 const obj1 = Singleton.getInstance('Elias', 20)
 const obj2 = Singleton.getInstance('Cris', 17)
 console.log(obj1 === obj2)
+
