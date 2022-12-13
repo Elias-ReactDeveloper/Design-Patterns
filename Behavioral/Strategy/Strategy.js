@@ -12,28 +12,47 @@ const Animal = function(sound, height, weight, name){
     this.height = height
     this.weight = weight
     this.name = name
+    this.fly = null
 }
 
-const FlyAbility = function(){
-    this.fly = () => {
-        console.log(`I'm flying`)
-    }
-}
-
-const Bird = function(sound, height, weight, name, fly){
-    
-    const animal = new Animal(sound, height, weight, name)
-
+const FlyAbility = function(fly){
     if(fly) {
-        this.birdBehaviors = new FlyAbility()
+        this.fly = () => {
+            console.log(`I'm flying`)
+        }
+    } else {
+        this.fly = () => {
+            console.log(`I can't fly`)
+        }
     }
+}
+
+const Dog = function(height, weight, name){
+    
+    const animal = new Animal('Au au', height, weight, name)
+    animal.fly = new FlyAbility(false).fly
 
     return {
-        ...animal,
-        ...this
+        ...this,
+        ...animal
     }
 }
 
-const bird = new Bird('piu piu', 20, 20, 'Jje', true)
-console.log(bird)
-bird.birdBehaviors.fly()
+const Bird = function(height, weight, name){
+    
+    const animal = new Animal('piu, piu', height, weight, name)
+    animal.fly = new FlyAbility(true).fly
+
+    return {
+        ...this,
+        ...animal
+    }
+}
+
+const bird = new Bird(20, 20, 'biru')
+console.log('bird', bird)
+bird.fly()
+
+const dog = new Dog(20, 20, 'toto')
+console.log('dog', dog)
+dog.fly()
